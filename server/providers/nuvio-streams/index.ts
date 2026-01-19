@@ -4,6 +4,7 @@ import { getMP4HydraStreams } from "./mp4hydra";
 import { getSoaperTvStreams } from "./soapertv";
 import { getVidSrcStreams } from "./vidsrc";
 import { getMoviesModStreams } from "./moviesmod";
+import { getStreams as getMovieBoxStreams } from "./moviebox";
 
 export interface NuvioStreamsProvider {
   id: string;
@@ -65,6 +66,15 @@ export const nuvioStreamsProviders: NuvioStreamsProvider[] = [
     enabled: true,
     logo: "https://moviesmod.build/favicon.ico",
     getStreams: getMoviesModStreams,
+  },
+  {
+    id: "moviebox",
+    name: "MovieBox",
+    description: "MovieBox streaming with multiple languages and qualities (API auth issue)",
+    supportedTypes: ["movie", "tv"],
+    enabled: false,
+    logo: "https://api.inmoviebox.com/favicon.ico",
+    getStreams: getMovieBoxStreams,
   },
 ];
 
@@ -149,6 +159,7 @@ const providerFilenames: Record<string, string> = {
   soapertv: "server/providers/nuvio-streams/soapertv.ts",
   "vidsrc-extractor": "server/providers/nuvio-streams/vidsrc.ts",
   "moviesmod-native": "server/providers/nuvio-streams/moviesmod.ts",
+  "moviebox": "server/providers/nuvio-streams/moviebox.ts",
 };
 
 export function getNuvioStreamsAsProviderList(): Provider[] {
